@@ -1,6 +1,6 @@
 /* Barra superior como logo */
 .navbar {
-    background-color: #485074; 
+    background-color: #0b0b95; 
     color: #ffffff; /* Texto branco */
     padding: 15px;
     text-align: center;
@@ -10,7 +10,7 @@
 
 /* Fundo geral da página (tom mais claro) */
 body {
-    background-color: #1e213b; 
+    background-color: #0d406f; 
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -19,7 +19,7 @@ body {
 
 /* Container de conteúdo principal (tom mais escuro) */
 .container {
-    background-color: #3b314f;
+    background-color: #382d76;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
@@ -30,7 +30,7 @@ body {
 
 /* Estilos para os cards dos anúncios */
 .card {
-    background-color: #485074;
+    background-color: #0b0b95;
     border: none;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
     color: #ffffff; /* Texto branco nos cards */

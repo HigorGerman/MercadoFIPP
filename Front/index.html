@@ -5,35 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MercadoFIPP - Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css"> <!-- Link do CSS personalizado -->
+    <style>
+        /* Estilo adicional para o botão Cadastrar Produto */
+        .btn-outline-light-custom {
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            background-color: transparent;
+        }
+        .btn-outline-light-custom:hover {
+            background-color: #ffffff;
+            color: #000000; /* Texto preto ao passar o mouse */
+        }
+        
+        /* Estilo para o carrossel com cards */
+        .carousel-item {
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-info h5 {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    
-    <div class="navbar">
-        MercadoFIPP
-    </div>
-
-   
-    <div class="container">
-        <h1 class="text-center">Bem-vindo ao MercadoFIPP</h1>
-        <p class="text-center">Compre e venda produtos novos ou usados!</p>
-
+    <!-- Navbar com links para Login e Cadastro e campo de busca centralizado -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
         
-        <h2 class="mt-5">Últimos Anúncios</h2>
-        <div class="row">
-            
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="imagem.jpg" class="card-img-top" alt="Imagem do Produto">
-                    <div class="card-body">
-                        <h5 class="card-title">Título do Produto</h5>
-                        <p class="card-text">Descrição breve do produto.</p>
-                        <p class="card-text"><strong>R$ 00,00</strong></p>
-                        <a href="#" class="btn btn-primary">Ver Anúncio</a>
-                    </div>
+        <!-- Campo de Busca centralizado com botão ao lado direito -->
+        <form class="form-inline mx-auto" style="width: 400px;">
+            <div class="input-group w-100">
+                <input type="text" class="form-control" placeholder="Buscar anúncios...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
             </div>
+        </form>
+
+        <!-- Botões de Login e Cadastro alinhados à direita -->
+        <div class="ml-auto">
+            <a href="login.html" class="btn btn-outline-light mr-2">Login</a>
+            <a href="cadastroUser.html" class="btn btn-outline-light">Cadastro</a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Bem-vindo ao MercadoFIPP</h1>
+            <a href="cadastro.html" class="btn btn-outline-light-custom">Cadastrar Produto</a>
+        </div>
+        <p class="text-left">Compre e venda produtos novos ou usados!</p>
+
+        <!-- Carrossel de Anúncios -->
+        <h2 class="mt-5">Últimos Anúncios</h2>
+        <div id="anuncioCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="product-card">
+                        <img src="imagem1.jpg" alt="Imagem do Produto 1">
+                        <div class="product-info">
+                            <h5>Título do Produto 1</h5>
+                            <p>Descrição breve do produto 1</p>
+                            <p><strong>R$ 00,00</strong></p>
+                            <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="imagem2.jpg" alt="Imagem do Produto 2">
+                        <div class="product-info">
+                            <h5>Título do Produto 2</h5>
+                            <p>Descrição breve do produto 2</p>
+                            <p><strong>R$ 00,00</strong></p>
+                            <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais slides conforme necessário -->
+            </div>
+            <!-- Controles do Carrossel -->
+            <a class="carousel-control-prev" href="#anuncioCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#anuncioCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
         </div>
     </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
