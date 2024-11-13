@@ -1,62 +1,59 @@
 /* Barra superior como logo */
 .navbar {
-    background-color: #333; /* Cinza escuro */
-    color: #ffffff;
+    background-color: #485074; 
+    color: #ffffff; /* Texto branco */
     padding: 15px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
 }
 
-/* Fundo geral da página */
+/* Fundo geral da página (tom mais claro) */
 body {
-    background-color: #f0f0f0; /* Cinza claro */
+    background-color: #1e213b; 
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #ffffff; /* Texto branco geral */
 }
 
-/* Container de conteúdo principal */
+/* Container de conteúdo principal (tom mais escuro) */
 .container {
-    background-color: #ffffff; /* Fundo branco para contraste */
+    background-color: #3b314f;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     margin-top: 30px;
     margin-bottom: 30px;
+    color: #ffffff; /* Texto branco no container principal */
 }
 
 /* Estilos para os cards dos anúncios */
 .card {
+    background-color: #485074;
     border: none;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.card-img-top {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.card-body {
-    padding: 15px;
+    color: #ffffff; /* Texto branco nos cards */
 }
 
 .card-title {
     font-size: 1.25rem;
-    color: #333;
+    color: #ffffff; /* Texto branco nos títulos dos cards */
 }
 
 .card-text {
-    color: #666;
+    color: #cccccc; /* Texto levemente mais claro nos detalhes do card */
 }
 
 /* Botões */
 .btn-primary {
     background-color: #0066cc;
     border-color: #005bb5;
+    color: #ffffff; /* Texto branco no botão */
 }
 
 .btn-primary:hover {
     background-color: #005bb5;
     border-color: #004a94;
+    color: #ffffff; /* Texto branco no botão ao passar o mouse */
 }
