@@ -57,3 +57,22 @@ body {
     border-color: #004a94;
     color: #ffffff; /* Texto branco no botão ao passar o mouse */
 }
+
+/* Estilo para a navbar personalizada */
+.navbar-custom {
+    background-color: #3b314f; /* Cor de fundo desejada */
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-custom .navbar-brand {
+    color: #ffffff; /* Cor branca para o texto da marca */
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: #cccccc; /* Cor levemente mais clara ao passar o mouse */
+}
+
