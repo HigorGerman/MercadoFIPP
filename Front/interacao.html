@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interação com o Vendedor - MercadoFIPP</title>
+    <link rel="stylesheet" href="frontend/estilo.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Interação com o Vendedor</h2>
+        <div class="chat-box mt-4">
+            <div class="chat-log border p-3 mb-4" style="height: 300px; overflow-y: scroll; background-color: #3e374b;">
+                <!-- Exemplo de perguntas e respostas -->
+                <p><strong>Comprador:</strong> Esse produto está disponível?</p>
+                <p><strong>Vendedor:</strong> Sim, está disponível!</p>
+                <p><strong>Comprador:</strong> Qual o prazo de entrega?</p>
+                <p><strong>Vendedor:</strong> De 3 a 5 dias úteis.</p>
+                <!-- Fim do exemplo -->
+            </div>
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Digite sua pergunta...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
