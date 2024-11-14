@@ -3,6 +3,7 @@ package unoeste.fipp.mercadofipp.restcontroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.mercadofipp.db.entity.Ad;
 import unoeste.fipp.mercadofipp.db.entity.Pergunta;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
@@ -60,5 +61,16 @@ public class AdRestController {
             return ResponseEntity.ok("ok");
         else
             return ResponseEntity.badRequest().body("erro");
+    }
+
+    @PostMapping(value = "add-photos")
+    public ResponseEntity<?> uploadPhotos(@RequestParam("adId") Long adId, @RequestParam("files")List<MultipartFile> files){
+        if(files.size()>3){
+            return ResponseEntity.badRequest().body("O maximo de fotos permitidas são 3");
+        }
+        boolean sucesso = adService.savePhotos(adId,files);
+        if(sucesso)
+            return ResponseEntity.ok("Fotos adicionadas com sucesso");
+        return ResponseEntity.badRequest().body("Erro ao adicionar as fotos");
     }
 }

@@ -3,12 +3,17 @@ package unoeste.fipp.mercadofipp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.mercadofipp.db.entity.Ad;
+import unoeste.fipp.mercadofipp.db.entity.Foto;
 import unoeste.fipp.mercadofipp.db.entity.Pergunta;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
 import unoeste.fipp.mercadofipp.db.repository.QuestionRepository;
 
+import java.io.File;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AdService {
@@ -59,4 +64,36 @@ public class AdService {
         }
         return pergunta;
     }
+
+    public boolean savePhotos(Long adId, List<MultipartFile> files) {
+        Optional<Ad> adOptional=adRepository.findById(adId);
+        if(!adOptional.isPresent())
+            return false;
+        Ad ad = adOptional.get();
+        for(MultipartFile file:files){
+            try{
+
+                //vai definir o diretorio de armazenamento
+                String diretorio = "uploads/photos/";
+                String fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+                File destinationFile = new File(diretorio+fileName);
+
+                //se o diretorio nao existir ele vai criar
+                destinationFile.getParentFile().mkdirs();
+                file.transferTo(destinationFile);
+
+                Foto foto = new Foto();
+                foto.setFilename(fileName);
+                foto.setAd(ad);
+                ad.getFotos().add(foto);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+        }
+        adRepository.save(ad);
+        return true;
+    }
+
 }
