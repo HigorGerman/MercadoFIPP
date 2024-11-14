@@ -18,30 +18,28 @@
             color: #000000; /* Texto preto ao passar o mouse */
         }
         
-        /* Estilo para o carrossel com cards */
-        .carousel-item {
-            display: flex;
-            justify-content: center;
+        /* Estilo para a lista de produtos em grade */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .product-card {
-            width: 300px;
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
             background-color: #ffffff;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
         }
 
         .product-card img {
             width: 100%;
             height: auto;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .product-info {
-            padding: 15px;
-            text-align: center;
+            margin-bottom: 10px;
         }
 
         .product-info h5 {
@@ -52,6 +50,22 @@
         .product-info p {
             margin: 5px 0;
             color: #666;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .product-discount {
+            color: #d9534f;
+            text-decoration: line-through;
+        }
+
+        .product-discount-price {
+            color: #5cb85c;
+            font-weight: bold;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -85,45 +99,64 @@
         </div>
         <p class="text-left">Compre e venda produtos novos ou usados!</p>
 
-        <!-- Carrossel de Anúncios -->
+        <!-- Lista de Anúncios -->
         <h2 class="mt-5">Últimos Anúncios</h2>
-        <div id="anuncioCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="product-card">
-                        <img src="imagem1.jpg" alt="Imagem do Produto 1">
-                        <div class="product-info">
-                            <h5>Título do Produto 1</h5>
-                            <p>Descrição breve do produto 1</p>
-                            <p><strong>R$ 00,00</strong></p>
-                            <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                        </div>
-                    </div>
+        <div class="product-list">
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <img src="imagem1.jpg" alt="Imagem do Produto 1">
+                <div class="product-info">
+                    <h5>Título do Produto 1</h5>
+                    <p>Descrição breve do produto 1</p>
+                    <p class="product-price">R$ 45,89</p>
+                    <p class="text-success">Frete grátis para sua primeira compra</p>
+                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
                 </div>
-                <!-- Slide 2 -->
-                <div class="carousel-item">
-                    <div class="product-card">
-                        <img src="imagem2.jpg" alt="Imagem do Produto 2">
-                        <div class="product-info">
-                            <h5>Título do Produto 2</h5>
-                            <p>Descrição breve do produto 2</p>
-                            <p><strong>R$ 00,00</strong></p>
-                            <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Adicione mais slides conforme necessário -->
             </div>
-            <!-- Controles do Carrossel -->
-            <a class="carousel-control-prev" href="#anuncioCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#anuncioCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <img src="imagem2.jpg" alt="Imagem do Produto 2">
+                <div class="product-info">
+                    <h5>Título do Produto 2</h5>
+                    <p>Descrição breve do produto 2</p>
+                    <p><span class="product-discount">R$ 50,00</span> <span class="product-discount-price">R$ 24,44</span></p>
+                    <p class="text-success">Frete grátis para sua primeira compra</p>
+                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                </div>
+            </div>
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <img src="imagem3.jpg" alt="Imagem do Produto 3">
+                <div class="product-info">
+                    <h5>Título do Produto 3</h5>
+                    <p>Descrição breve do produto 3</p>
+                    <p class="product-price">R$ 33,90</p>
+                    <p class="text-success">Frete grátis para sua primeira compra</p>
+                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                </div>
+            </div>
+            <!-- Produto 4 -->
+            <div class="product-card">
+                <img src="imagem4.jpg" alt="Imagem do Produto 4">
+                <div class="product-info">
+                    <h5>Título do Produto 4</h5>
+                    <p>Descrição breve do produto 4</p>
+                    <p class="product-price">R$ 32,50</p>
+                    <p class="text-success">Frete grátis para sua primeira compra</p>
+                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                </div>
+            </div>
+            <!-- Produto 5 -->
+            <div class="product-card">
+                <img src="imagem5.jpg" alt="Imagem do Produto 5">
+                <div class="product-info">
+                    <h5>Título do Produto 5</h5>
+                    <p>Descrição breve do produto 5</p>
+                    <p><span class="product-discount">R$ 137,00</span> <span class="product-discount-price">R$ 116,45</span></p>
+                    <p class="text-success">Frete grátis para sua primeira compra</p>
+                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
+                </div>
+            </div>
         </div>
     </div>
 
