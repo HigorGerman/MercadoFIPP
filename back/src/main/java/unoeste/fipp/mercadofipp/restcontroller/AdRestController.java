@@ -1,6 +1,8 @@
 package unoeste.fipp.mercadofipp.restcontroller;
 
+import org.hibernate.type.internal.ImmutableNamedBasicTypeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,10 +34,16 @@ public class AdRestController {
     {
         return ResponseEntity.ok(adService.getAll(""));
     }
+
     @GetMapping(value="get-with-filter")
-    public ResponseEntity<Object> getWithFilter(String filtro)
+    public ResponseEntity<Object> getWithFilter(@RequestParam(required = false) Long catId,
+                                                @RequestParam(required = false) Double minPrice,
+                                                @RequestParam(required = false) Double maxPrice,
+                                                @RequestParam(required = false) String startDate,
+                                                @RequestParam(required = false) String endDate,
+                                                @RequestParam(required = false) String sortBy, Sort sort)
     {
-        return ResponseEntity.ok(adService.getAll(filtro));
+        return ResponseEntity.ok(adService.getAllWithFilter(catId, minPrice, maxPrice, startDate, endDate, sortBy));
     }
 
     @PostMapping(value="add")
@@ -52,7 +60,7 @@ public class AdRestController {
         if(pergunta!=null)
             return ResponseEntity.ok(pergunta);
         else
-            return ResponseEntity.badRequest().body("Erro");
+            return ResponseEntity.badRequest().body("Erro ao add pergunta");
     }
     @GetMapping(value="delete")
     public ResponseEntity<Object> delete(Long id)
@@ -73,4 +81,6 @@ public class AdRestController {
             return ResponseEntity.ok("Fotos adicionadas com sucesso");
         return ResponseEntity.badRequest().body("Erro ao adicionar as fotos");
     }
+
+
 }

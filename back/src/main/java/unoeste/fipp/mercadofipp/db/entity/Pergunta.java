@@ -16,7 +16,7 @@ public class Pergunta {
     private String resp;
 
     //@OneToOne(fetch=FetchType.LAZY)
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "anu_id")
     //@JsonIgnore
     private Ad ad;
@@ -55,9 +55,9 @@ public class Pergunta {
         this.resp = resp;
     }
 
-//    public Ad getAd() {
-//        return ad;
-//    }
+    public Ad getAd() {
+        return ad;
+    }
 
     public void setAd(Ad ad) {
         this.ad = ad;

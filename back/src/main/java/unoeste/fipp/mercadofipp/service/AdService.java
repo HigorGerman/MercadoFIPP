@@ -1,6 +1,9 @@
 package unoeste.fipp.mercadofipp.service;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +13,9 @@ import unoeste.fipp.mercadofipp.db.entity.Pergunta;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
 import unoeste.fipp.mercadofipp.db.repository.QuestionRepository;
 
+import javax.swing.text.html.HTMLDocument;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,6 +32,7 @@ public class AdService {
         Ad ad = adRepository.findById(id).get();
         return ad;
     }
+
     public List<Ad> getAll(String filter){
         List<Ad> adList=null;
         if(filter.isEmpty())
@@ -56,13 +62,24 @@ public class AdService {
 
 
     public Pergunta addQuestion(Pergunta pergunta) {
-        try{
-            pergunta=questionRepository.save(pergunta);
+        try {
+            Long adId = pergunta.getAd().getId();
+            Ad ad = adRepository.findById(adId).orElseThrow(() -> new RuntimeException("Anúncio não encontrado"));
+
+            // Associa o anúncio confirmado à pergunta e salva
+            pergunta.setAd(ad);
+            return questionRepository.save(pergunta);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        catch(Exception e){
-            pergunta=null;
-        }
-        return pergunta;
+    }
+
+
+    public Pergunta  answerQuestion(Long questionId, String response) {
+        Pergunta question = questionRepository.findById(questionId).orElseThrow(() -> new RuntimeException("Pergunta não encontrada"));
+        question.setResp(response);
+        return questionRepository.save(question);
     }
 
     public boolean savePhotos(Long adId, List<MultipartFile> files) {
@@ -96,4 +113,37 @@ public class AdService {
         return true;
     }
 
+    public List<Ad> getAllWithFilter(Long catId, Double minPrice, Double maxPrice, String startDate, String endDate, String sortBy) {
+        //faz uma consulta personalizada com filtros
+        Specification<Ad> spec = Specification.where(null);
+
+        if (catId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("category").get("id"), catId));
+        }
+
+        if (minPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+        }
+
+        if (maxPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        }
+
+        if (startDate != null && endDate != null) {
+            LocalDate start = LocalDate.parse(startDate);
+            LocalDate end = LocalDate.parse(endDate);
+            spec = spec.and((root, query, cb) -> cb.between(root.get("date"), start, end));
+        }
+
+        Sort sort = Sort.by("date").descending();
+        if ("priceAsc".equals(sortBy)) {
+            sort = Sort.by("price").ascending();
+        } else if ("priceDesc".equals(sortBy)) {
+            sort = Sort.by("price").descending();
+        } else if ("recent".equals(sortBy)) {
+            sort = Sort.by("date").descending();
+        }
+
+        return adRepository.findAll(spec, sort);
+    }
 }
