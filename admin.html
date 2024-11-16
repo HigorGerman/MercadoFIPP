@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo Administrativo - MercadoFIPP</title>
+    <link rel="stylesheet" href="frontend/estilo.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Módulo Administrativo</h2>
+        
+        <!-- Seção de Gerenciamento de Categorias -->
+        <h4 class="mt-4">Gerenciamento de Categorias</h4>
+        <form class="form-inline mb-3">
+            <input type="text" class="form-control mr-2" placeholder="Nome da categoria">
+            <button type="submit" class="btn btn-primary">Adicionar Categoria</button>
+        </form>
+        <ul class="list-group mb-4">
+            <!-- Exemplo de categoria -->
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Categoria 1
+                <span>
+                    <button class="btn btn-sm btn-warning">Editar</button>
+                    <button class="btn btn-sm btn-danger">Excluir</button>
+                </span>
+            </li>
+            <!-- Fim do exemplo -->
+        </ul>
+
+        <!-- Seção de Exclusão de Anúncios -->
+        <h4>Exclusão de Anúncios</h4>
+        <table class="table table-dark table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de anúncio -->
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Anúncio Exemplo</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+                </tr>
+                <!-- Fim do exemplo -->
+            </tbody>
+        </table>
+
+        <!-- Seção de Exclusão de Usuários -->
+        <h4>Exclusão de Usuários</h4>
+        <table class="table table-dark table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de usuário -->
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Usuário Exemplo</td>
+                    <td>usuario@exemplo.com</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+                </tr>
+                <!-- Fim do exemplo -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
