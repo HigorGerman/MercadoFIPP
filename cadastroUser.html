@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário - MercadoFIPP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+       
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
+    </nav>
+    
+
+    <div class="container mt-5">
+        <h2 class="text-center">Cadastro de Usuário</h2>
+        <form class="mt-4">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+            </div>
+            <div class="form-group">
+                <label for="nivel">Nível de Acesso</label>
+                <select class="form-control" id="nivel">
+                    <option>Comprador/Vendedor</option>
+                    <option>Administrador</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>
