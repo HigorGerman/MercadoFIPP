@@ -3,17 +3,20 @@ package unoeste.fipp.mercadofipp.db.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="usuario")
+@Table(name = "usuario")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="usr_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "usr_id")
     private Long id;
-    @Column(name="usr_name")
+
+    @Column(name = "usr_name")
     private String name;
-    @Column(name="usr_pass")
+
+    @Column(name = "usr_pass")
     private String pass;
-    @Column(name="usr_level")
+
+    @Column(name = "usr_level")
     private char level;
 
     public User(Long id, String name, String pass, char level) {
@@ -24,7 +27,7 @@ public class User {
     }
 
     public User() {
-        this(0L,"","",'1');
+        this(0L, "", "", '1');
     }
 
     public Long getId() {

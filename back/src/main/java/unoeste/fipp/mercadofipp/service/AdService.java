@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.mercadofipp.db.entity.Ad;
 import unoeste.fipp.mercadofipp.db.entity.Foto;
 import unoeste.fipp.mercadofipp.db.entity.Pergunta;
+import unoeste.fipp.mercadofipp.db.entity.User;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
 import unoeste.fipp.mercadofipp.db.repository.QuestionRepository;
 
@@ -76,8 +77,12 @@ public class AdService {
     }
 
 
-    public Pergunta  answerQuestion(Long questionId, String response) {
+    public Pergunta  answerQuestion(Long questionId, String response, User currentUser) {
         Pergunta question = questionRepository.findById(questionId).orElseThrow(() -> new RuntimeException("Pergunta não encontrada"));
+        Ad ad = question.getAd();
+        if(!ad.getUser().equals(currentUser) && currentUser.getLevel()!= 'A'){
+            throw new RuntimeException("Usuario não autorizado a responder essa pergunta");
+        }
         question.setResp(response);
         return questionRepository.save(question);
     }
@@ -90,7 +95,7 @@ public class AdService {
         for(MultipartFile file:files){
             try{
 
-                //vai definir o diretorio de armazenamento
+
                 String diretorio = "uploads/photos/";
                 String fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
                 File destinationFile = new File(diretorio+fileName);
@@ -146,4 +151,8 @@ public class AdService {
 
         return adRepository.findAll(spec, sort);
     }
+    public List<Pergunta> getQuestionsByAd(Long adId) {
+        return questionRepository.findByAdId(adId);
+    }
+
 }

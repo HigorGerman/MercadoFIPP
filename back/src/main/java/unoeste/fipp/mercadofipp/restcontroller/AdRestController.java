@@ -4,10 +4,12 @@ import org.hibernate.type.internal.ImmutableNamedBasicTypeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.mercadofipp.db.entity.Ad;
 import unoeste.fipp.mercadofipp.db.entity.Pergunta;
+import unoeste.fipp.mercadofipp.db.entity.User;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
 import unoeste.fipp.mercadofipp.service.AdService;
 
@@ -62,6 +64,21 @@ public class AdRestController {
         else
             return ResponseEntity.badRequest().body("Erro ao add pergunta");
     }
+    @PostMapping(value="answer-question")
+    public ResponseEntity<Object> answerQuestion(@RequestParam Long questionId, @RequestParam String response, @AuthenticationPrincipal User currentUser) {
+        Pergunta pergunta = adService.answerQuestion(questionId, response,currentUser);
+        if(pergunta != null)
+            return ResponseEntity.ok(pergunta);
+        else
+            return ResponseEntity.badRequest().body("Erro ao responder a pergunta");
+    }
+
+    @GetMapping("questions-by-ad")
+    public ResponseEntity<Object> getQuestionsByAd(@RequestParam Long adId) {
+        List<Pergunta> perguntas    = adService.getQuestionsByAd(adId);
+        return ResponseEntity.ok(perguntas);
+    }
+
     @GetMapping(value="delete")
     public ResponseEntity<Object> delete(Long id)
     {
