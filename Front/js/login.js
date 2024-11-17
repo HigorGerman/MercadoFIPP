@@ -1,29 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault(); 
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
 
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-        try {
-            const response = await fetch("/access/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams({ email, password: senha })
-            });
+    const loginData = {
+        user: username,
+        pass: password,
+    };
 
-            if (response.ok) {
-                const message = await response.text(); 
-                alert(message);
-                window.location.href = "index.html"; 
-            } else {
-                const error = await response.text();
-                alert("Erro: " + error); 
-            }
-        } catch (error) {
-            alert("Erro ao conectar ao servidor: " + error.message);
+    try {
+        const response = await fetch('http://localhost:8080/access/login', { // Altere a URL para o backend no deploy
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Bem-vindo, ${result.username}!`);
+            window.location.href = "index.html"; // Redireciona para a página principal
+        } else {
+            document.getElementById('errorMessage').textContent = "Credenciais inválidas.";
+            document.getElementById('errorMessage').style.display = 'block';
         }
-    });
+    } catch (error) {
+        console.error('Erro na solicitação:', error);
+        document.getElementById('errorMessage').textContent = "Erro ao conectar-se ao servidor.";
+        document.getElementById('errorMessage').style.display = 'block';
+    }
 });

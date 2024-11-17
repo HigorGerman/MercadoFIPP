@@ -14,13 +14,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
+
 
     public boolean deleteUser(Long id) {
         if (userRepository.existsById(id)) {
@@ -28,5 +31,15 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+
+    public boolean userExists(String username) {
+        return userRepository.findByNameAndPass(username, "").isPresent();
     }
 }
