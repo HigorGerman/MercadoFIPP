@@ -1,7 +1,7 @@
 // index.js
 async function fetchLatestAds() {
     try {
-        const response = await axios.get('http://localhost:8080/apis/ad/latest');
+        const response = await axios.get('http://localhost:8080/apis/ad/get-latest');
         const ads = response.data;
 
         // Renderizar os anúncios nos cards

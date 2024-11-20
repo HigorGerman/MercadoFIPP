@@ -76,3 +76,49 @@ body {
     color: #cccccc; /* Cor levemente mais clara ao passar o mouse */
 }
 
+body {
+    background-color: #2E2459;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #382d76;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h3 {
+    color: #ffffff;
+}
+
+.table {
+    background-color: #4B3A91;
+    color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.table th {
+    background-color: #6C58B0;
+    color: #ffffff;
+}
+
+.table td {
+    vertical-align: middle;
+    color: #e6e6e6;
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    border-color: #ff3333;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #e60000;
+    border-color: #cc0000;
+}

@@ -22,11 +22,11 @@ public class Ad {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name="cat_id",nullable = false)
+    @JoinColumn(name = "cat_id", nullable = false)
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "usr_id",nullable = false)
+    @JoinColumn(name = "usr_id", nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "ad")
@@ -35,8 +35,8 @@ public class Ad {
     @OneToMany(mappedBy = "ad")
     private List<Pergunta> perguntas;
 
-    public Ad(Long id, String title, LocalDate date, String descr, double price, Category category, User user, List <Foto> fotos,
-              List <Pergunta> perguntas) {
+    public Ad(Long id, String title, LocalDate date, String descr, double price, Category category, User user, List<Foto> fotos,
+              List<Pergunta> perguntas) {
         Id = id;
         this.title = title;
         this.date = date;
@@ -44,12 +44,12 @@ public class Ad {
         this.price = price;
         this.category = category;
         this.user = user;
-        this.fotos=fotos;
-        this.perguntas=perguntas;
+        this.fotos = fotos;
+        this.perguntas = perguntas;
     }
 
     public Ad() {
-        this(0L,"",LocalDate.now(),"",0,null,null,null,null);
+        this(0L, "", LocalDate.now(), "", 0, null, null, null, null);
     }
 
     public Long getId() {
@@ -115,6 +115,7 @@ public class Ad {
     public void setFotos(List<Foto> fotos) {
         this.fotos = fotos;
     }
+
     public List<Pergunta> getPerguntas() {
         return perguntas;
     }
@@ -122,4 +123,5 @@ public class Ad {
     public void setPerguntas(List<Pergunta> perguntas) {
         this.perguntas = perguntas;
     }
+
 }

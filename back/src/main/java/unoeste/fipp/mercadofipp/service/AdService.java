@@ -12,6 +12,7 @@ import unoeste.fipp.mercadofipp.db.entity.Foto;
 import unoeste.fipp.mercadofipp.db.entity.Pergunta;
 import unoeste.fipp.mercadofipp.db.entity.User;
 import unoeste.fipp.mercadofipp.db.repository.AdRepository;
+import unoeste.fipp.mercadofipp.db.repository.PhotoRepository;
 import unoeste.fipp.mercadofipp.db.repository.QuestionRepository;
 
 import javax.swing.text.html.HTMLDocument;
@@ -153,6 +154,38 @@ public class AdService {
     }
     public List<Pergunta> getQuestionsByAd(Long adId) {
         return questionRepository.findByAdId(adId);
+    }
+
+    @Autowired
+    private PhotoRepository fotoRepository;
+
+    public boolean addAdWithPhotos(Ad ad, List<MultipartFile> files) {
+        try {
+            // Salva o anúncio no banco de dados
+            ad = adRepository.save(ad);
+
+            // Processa e salva as fotos
+            for (MultipartFile file : files) {
+                String diretorio = "uploads/photos/";
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                File destinationFile = new File(diretorio + fileName);
+
+                // Cria o diretório, se necessário, e salva o arquivo
+                destinationFile.getParentFile().mkdirs();
+                file.transferTo(destinationFile);
+
+                // Cria a entidade Foto e associa ao anúncio
+                Foto foto = new Foto();
+                foto.setFilename(fileName);
+                foto.setAd(ad);
+                fotoRepository.save(foto); // Salva a foto no banco de dados
+            }
+
+            return true; // Tudo foi salvo com sucesso
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Algum erro ocorreu
+        }
     }
 
 }

@@ -77,9 +77,41 @@ public class AccessRestController {
         }
     }
 
-    // Endpoint para testar se a API está funcionando (opcional)
-    @GetMapping(value = "test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("API de acesso funcionando!");
+
+    @PostMapping(value = "admin-login")
+    public ResponseEntity<Object> adminLogin(@Valid @RequestBody Map<String, String> loginRequest) {
+        String username = loginRequest.get("user");
+        String password = loginRequest.get("pass");
+
+        if (username == null || password == null) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Nome de usuário e senha são obrigatórios."
+            ));
+        }
+
+        // Busca o administrador no banco
+        var adminFound = userService.getAllUsers()
+                .stream()
+                .filter(user -> user.getName().equals(username)
+                        && user.getPass().equals(password)
+                        && user.getLevel() == 'A') // Checa se o nível é 'A'
+                .findFirst();
+
+        if (adminFound.isPresent()) {
+            User adminUser = adminFound.get();
+
+            // Retorna as informações do administrador logado
+            return ResponseEntity.ok(Map.of(
+                    "message", "Login administrativo bem-sucedido!",
+                    "userId", adminUser.getId(),
+                    "username", adminUser.getName(),
+                    "accessLevel", "Administrador"
+            ));
+        } else {
+            // Credenciais inválidas ou não é administrador
+            return ResponseEntity.status(401).body(Map.of(
+                    "error", "Credenciais inválidas ou acesso não autorizado."
+            ));
+        }
     }
 }

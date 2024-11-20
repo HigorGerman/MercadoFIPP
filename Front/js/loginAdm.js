@@ -1,5 +1,5 @@
-document.getElementById('loginForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evita o comportamento padrão do formulário
+document.getElementById('adminLoginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     };
 
     try {
-        const response = await fetch('http://localhost:8080/access/login', { 
+        const response = await fetch('http://localhost:8080/access/admin-login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,12 +20,13 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             const result = await response.json();
-            alert(`Bem-vindo, ${result.username}!`);
-            window.location.href = "index.html"; // Redireciona para a página principal
+            alert(`Bem-vindo, administrador ${result.username}!`);
+            window.location.href = "AdmTela.html"; // Alterado para a tela correta
         } else {
             document.getElementById('errorMessage').textContent = "Credenciais inválidas.";
             document.getElementById('errorMessage').style.display = 'block';
         }
+        
     } catch (error) {
         console.error('Erro na solicitação:', error);
         document.getElementById('errorMessage').textContent = "Erro ao conectar-se ao servidor.";
