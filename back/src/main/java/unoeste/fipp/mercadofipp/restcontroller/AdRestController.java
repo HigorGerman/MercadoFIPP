@@ -16,7 +16,7 @@ import unoeste.fipp.mercadofipp.service.AdService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="apis/ad")
+@RequestMapping(value="apis/ad/")
 public class AdRestController {
     
     @Autowired

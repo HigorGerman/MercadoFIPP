@@ -1,10 +1,12 @@
 package unoeste.fipp.mercadofipp.restcontroller;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unoeste.fipp.mercadofipp.db.entity.Category;
 import unoeste.fipp.mercadofipp.db.entity.User;
+import unoeste.fipp.mercadofipp.service.AdService;
 import unoeste.fipp.mercadofipp.service.CategoryService;
 import unoeste.fipp.mercadofipp.service.UserService;
 
@@ -13,6 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminRestController {
+
+    @Autowired
+    private AdService adService;
 
     @Autowired
     private CategoryService  categoryService;
@@ -55,7 +60,16 @@ public class AdminRestController {
         return ResponseEntity.notFound().build();
     }
 
-    // Endpoints para usuários
+    //exclusao de anuncio
+    @DeleteMapping("/ad/{id}")
+    public ResponseEntity<?> deleteAd(@PathVariable Long id) {
+        if(adService.delAd(id)){
+            return ResponseEntity.ok("Anuncio excluido");
+        }
+        return ResponseEntity.notFound().build();
+
+    }
+    //usuários
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());

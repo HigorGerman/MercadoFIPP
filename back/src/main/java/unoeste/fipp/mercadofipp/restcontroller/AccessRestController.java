@@ -52,7 +52,6 @@ public class AccessRestController {
         }
     }
 
-    // Endpoint para registrar um novo usuário
     @PostMapping(value = "register")
     public ResponseEntity<Object> register(@Valid @RequestBody User newUser) {
         try {
