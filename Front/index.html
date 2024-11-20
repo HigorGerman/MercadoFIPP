@@ -5,67 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MercadoFIPP - Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css"> <!-- Link do CSS personalizado -->
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilo adicional para o botão Cadastrar Produto */
-        .btn-outline-light-custom {
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            background-color: transparent;
-        }
-        .btn-outline-light-custom:hover {
-            background-color: #ffffff;
-            color: #000000; /* Texto preto ao passar o mouse */
-        }
-        
-        /* Estilo para a lista de produtos em grade */
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
         .product-card {
+            width: 100%;
+            max-width: 250px;
+            margin: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
-            background-color: #ffffff;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
             text-align: center;
         }
 
-        .product-card img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .product-info h5 {
-            font-size: 1rem;
-            color: #333;
-        }
-
-        .product-info p {
-            margin: 5px 0;
-            color: #666;
+        .product-info {
+            padding: 10px;
         }
 
         .product-price {
             font-weight: bold;
-            color: #000;
+            color: #28a745;
         }
 
-        .product-discount {
-            color: #d9534f;
-            text-decoration: line-through;
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
         }
 
-        .product-discount-price {
-            color: #5cb85c;
-            font-weight: bold;
-            margin-left: 5px;
+        table {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -73,8 +42,6 @@
     <!-- Navbar com links para Login e Cadastro e campo de busca centralizado -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="navbar-brand" href="index.html">MercadoFIPP</a>
-        
-        <!-- Campo de Busca centralizado com botão ao lado direito -->
         <form class="form-inline mx-auto" style="width: 400px;">
             <div class="input-group w-100">
                 <input type="text" class="form-control" placeholder="Buscar anúncios...">
@@ -83,8 +50,6 @@
                 </div>
             </div>
         </form>
-
-        <!-- Botões de Login e Cadastro alinhados à direita -->
         <div class="ml-auto">
             <a href="login.html" class="btn btn-outline-light mr-2">Login</a>
             <a href="cadastroUser.html" class="btn btn-outline-light">Cadastro</a>
@@ -95,75 +60,36 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h1>Bem-vindo ao MercadoFIPP</h1>
-            <a href="cadastro.html" class="btn btn-outline-light-custom">Cadastrar Produto</a>
+            <a href="CadastroAnuncio.html" class="btn btn-outline-light mr-2">Cadastrar Produto</a>
         </div>
         <p class="text-left">Compre e venda produtos novos ou usados!</p>
 
-        <!-- Lista de Anúncios -->
+        <!-- Lista de Anúncios em Cards -->
         <h2 class="mt-5">Últimos Anúncios</h2>
-        <div class="product-list">
-            <!-- Produto 1 -->
-            <div class="product-card">
-                <img src="imagem1.jpg" alt="Imagem do Produto 1">
-                <div class="product-info">
-                    <h5>Título do Produto 1</h5>
-                    <p>Descrição breve do produto 1</p>
-                    <p class="product-price">R$ 45,89</p>
-                    <p class="text-success">Frete grátis para sua primeira compra</p>
-                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                </div>
-            </div>
-            <!-- Produto 2 -->
-            <div class="product-card">
-                <img src="imagem2.jpg" alt="Imagem do Produto 2">
-                <div class="product-info">
-                    <h5>Título do Produto 2</h5>
-                    <p>Descrição breve do produto 2</p>
-                    <p><span class="product-discount">R$ 50,00</span> <span class="product-discount-price">R$ 24,44</span></p>
-                    <p class="text-success">Frete grátis para sua primeira compra</p>
-                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                </div>
-            </div>
-            <!-- Produto 3 -->
-            <div class="product-card">
-                <img src="imagem3.jpg" alt="Imagem do Produto 3">
-                <div class="product-info">
-                    <h5>Título do Produto 3</h5>
-                    <p>Descrição breve do produto 3</p>
-                    <p class="product-price">R$ 33,90</p>
-                    <p class="text-success">Frete grátis para sua primeira compra</p>
-                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                </div>
-            </div>
-            <!-- Produto 4 -->
-            <div class="product-card">
-                <img src="imagem4.jpg" alt="Imagem do Produto 4">
-                <div class="product-info">
-                    <h5>Título do Produto 4</h5>
-                    <p>Descrição breve do produto 4</p>
-                    <p class="product-price">R$ 32,50</p>
-                    <p class="text-success">Frete grátis para sua primeira compra</p>
-                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                </div>
-            </div>
-            <!-- Produto 5 -->
-            <div class="product-card">
-                <img src="imagem5.jpg" alt="Imagem do Produto 5">
-                <div class="product-info">
-                    <h5>Título do Produto 5</h5>
-                    <p>Descrição breve do produto 5</p>
-                    <p><span class="product-discount">R$ 137,00</span> <span class="product-discount-price">R$ 116,45</span></p>
-                    <p class="text-success">Frete grátis para sua primeira compra</p>
-                    <a href="interacao.html" class="btn btn-primary">Falar com Vendedor</a>
-                </div>
-            </div>
+        <div class="product-list" id="latest-ads">
+            <!-- Os cards dos anúncios serão renderizados dinamicamente -->
         </div>
+
+        <!-- Tabela com Detalhes dos Anúncios -->
+        <h2 class="mt-5">Anúncios Detalhados</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody id="detailed-ads">
+                <!-- Os anúncios detalhados serão renderizados dinamicamente -->
+            </tbody>
+        </table>
     </div>
 
-    <!-- Scripts do Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/login.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

@@ -99,5 +99,14 @@ public class AdRestController {
         return ResponseEntity.badRequest().body("Erro ao adicionar as fotos");
     }
 
+    @Autowired
+    private AdRepository adRepository;
+
+    @GetMapping("/get-latest")
+    public ResponseEntity<List<Ad>> getLatestAds(@RequestParam(defaultValue = "5") int limit) {
+        List<Ad> ads = adRepository.findTopByOrderByDateDesc(limit);
+        return ResponseEntity.ok(ads);
+    }
+
 
 }
