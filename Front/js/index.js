@@ -1,20 +1,49 @@
+// Atualiza a navbar com base no estado de login
+function updateNavbarForLoggedUser() {
+    const userName = localStorage.getItem('userName'); // Obtém o nome do usuário do localStorage
+    const navbarActions = document.getElementById('navbar-user-actions');
+
+    if (userName) {
+        navbarActions.innerHTML = `
+            <span class="navbar-text mr-3">Olá, ${userName}!</span>
+            <a href="BuscaAnuncio.html" class="btn btn-outline-light mr-2">Buscar</a>
+            <a href="CadastroAnuncio.html" class="btn btn-outline-light mr-2">Cadastrar Produto</a>
+            <button id="logout-btn" class="btn btn-outline-light">Sair</button>
+            <a href="loginAdm.html" class="btn btn-outline-light ml-2">Administrativo</a>
+        `;
+
+        // Configura o botão de logout
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('userName'); // Remove o nome do usuário
+            window.location.href = "index.html"; // Redireciona para a página principal
+        });
+    } else {
+        navbarActions.innerHTML = `
+            <a href="login.html" class="btn btn-outline-light mr-2">Login</a>
+            <a href="cadastroUser.html" class="btn btn-outline-light">Cadastro</a>
+            <a href="loginAdm.html" class="btn btn-outline-light ml-2">Administrativo</a>
+        `;
+    }
+}
+
+// Chama a função ao carregar a página
+document.addEventListener('DOMContentLoaded', updateNavbarForLoggedUser);
+
+
+// Função para buscar e exibir anúncios
 async function fetchLatestAds() {
     try {
-        // Faz a requisição para o backend
         const response = await axios.get('http://localhost:8080/apis/ad/get-latest');
-
-        // Obtém os dados da resposta
         const ads = response.data;
 
-        // Verifica se a resposta é um array
         if (!Array.isArray(ads)) {
             console.error("Os anúncios retornados não são um array:", ads);
-            return; // Sai da função se não for um array
+            return;
         }
 
-        // Renderizar os anúncios nos cards
+        // Renderiza anúncios nos cards
         const adsContainer = document.getElementById("latest-ads");
-        adsContainer.innerHTML = ""; // Limpa o container antes de adicionar novos anúncios
+        adsContainer.innerHTML = ""; // Limpa o container
 
         ads.forEach(ad => {
             const card = `
@@ -32,9 +61,9 @@ async function fetchLatestAds() {
             adsContainer.innerHTML += card;
         });
 
-        // Renderizar os anúncios na tabela
+        // Renderiza anúncios na tabela
         const tableBody = document.getElementById("detailed-ads");
-        tableBody.innerHTML = ""; // Limpa a tabela antes de adicionar novos anúncios
+        tableBody.innerHTML = ""; // Limpa a tabela
 
         ads.forEach(ad => {
             const row = `
@@ -49,19 +78,19 @@ async function fetchLatestAds() {
             tableBody.innerHTML += row;
         });
     } catch (error) {
-        // Trata erros de requisição
         console.error("Erro ao buscar anúncios:", error);
-
-        // Exibe uma mensagem de erro amigável na tela, se necessário
         const adsContainer = document.getElementById("latest-ads");
         adsContainer.innerHTML = `<p class="text-danger">Não foi possível carregar os anúncios. Tente novamente mais tarde.</p>`;
     }
 }
 
-// Função para navegar para a página de detalhes do anúncio
+// Função para redirecionar para detalhes do anúncio
 function navigateToDetails(adId) {
     window.location.href = `DetalhesAnuncio.html?adId=${adId}`;
 }
 
-// Chama a função ao carregar a página
-fetchLatestAds();
+// Inicializa a página
+document.addEventListener('DOMContentLoaded', () => {
+    updateNavbarForLoggedUser(); // Atualiza a navbar
+    fetchLatestAds(); // Carrega os anúncios
+});

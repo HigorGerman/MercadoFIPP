@@ -20,6 +20,10 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             const result = await response.json();
+
+            // Salva o nome do usuário no localStorage
+            localStorage.setItem('userName', result.username);
+
             alert(`Bem-vindo, ${result.username}!`);
             window.location.href = "index.html"; // Redireciona para a página principal
         } else {
