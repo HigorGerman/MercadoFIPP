@@ -19,6 +19,7 @@ public class Pergunta {
     @ManyToOne
     @JoinColumn(name = "anu_id")
     //@JsonIgnore
+    @JsonIgnore // Ignora o campo durante a serialização para evitar ciclo
     private Ad ad;
 
     public Pergunta(Long id, String text, String resp) {

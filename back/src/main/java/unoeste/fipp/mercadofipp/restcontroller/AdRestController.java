@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value="apis/ad/")
 public class AdRestController {
-    
+
     @Autowired
     AdService adService;
 
@@ -128,5 +128,6 @@ public class AdRestController {
             return ResponseEntity.status(500).body("Erro ao processar a solicitação.");
         }
     }
+    
 
 }

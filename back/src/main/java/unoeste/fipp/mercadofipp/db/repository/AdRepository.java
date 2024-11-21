@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import unoeste.fipp.mercadofipp.db.entity.Ad;
+import unoeste.fipp.mercadofipp.db.entity.Category;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     List<Ad> findTopByOrderByDateDesc(@Param("limit") int limit);
 
     List<Ad> findAll(Specification<Ad> spec, Sort sort);
+
+
+    @Query("SELECT DISTINCT a.category FROM Ad a")
+    List<Category> findDistinctCategories();
+
 }

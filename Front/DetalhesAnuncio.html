@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Anúncio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container mt-5">
+        <!-- Detalhes do Anúncio -->
+        <h1 id="ad-title">Título do Anúncio</h1>
+        <p id="ad-description">Descrição do anúncio será carregada aqui.</p>
+        <p><strong>Categoria:</strong> <span id="ad-category">Categoria</span></p>
+        <p><strong>Preço:</strong> R$ <span id="ad-price">0.00</span></p>
+        <p><strong>Data:</strong> <span id="ad-date">Data não disponível</span></p>
+        <hr>
+
+        <!-- Seção de Perguntas e Respostas -->
+        <h3>Perguntas e Respostas</h3>
+        <div id="ad-questions">
+            <!-- Perguntas e respostas serão carregadas dinamicamente -->
+        </div>
+
+        <!-- Formulário para enviar perguntas -->
+        <h4>Enviar Pergunta</h4>
+        <form id="question-form">
+            <div class="form-group">
+                <textarea class="form-control" id="question-text" rows="3" placeholder="Digite sua pergunta"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Pergunta</button>
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/DetalhesAnuncio.js"></script>
+</body>
+</html>

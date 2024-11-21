@@ -1,4 +1,6 @@
 package unoeste.fipp.mercadofipp.service;
+import unoeste.fipp.mercadofipp.db.entity.Category;
+
 
 import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,5 +204,66 @@ public class AdService {
         }
     }
 
+
+    public List<Ad> searchAds(String title, Long categoryId, Double minPrice, Double maxPrice, String sortBy) {
+        Specification<Ad> spec = Specification.where(null);
+
+        if (title != null && !title.isEmpty()) {
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("title")), "%" + title.toLowerCase() + "%"));
+        }
+        if (categoryId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("category").get("id"), categoryId));
+        }
+        if (minPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+        }
+        if (maxPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        }
+
+        Sort sort = Sort.by("date").descending();
+        if ("priceAsc".equals(sortBy)) {
+            sort = Sort.by("price").ascending();
+        } else if ("priceDesc".equals(sortBy)) {
+            sort = Sort.by("price").descending();
+        }
+
+        return adRepository.findAll(spec, sort);
+    }
+
+    public List<Category> getCategoriesFromAds() {
+        return adRepository.findDistinctCategories();
+    }
+
+    public List<Category> getDistinctCategories() {
+        return adRepository.findDistinctCategories();
+    }
+
+    public List<Ad> getAllWithFilter(String title, Double minPrice, Double maxPrice, String sortBy) {
+        Specification<Ad> spec = Specification.where(null);
+
+        if (title != null && !title.isEmpty()) {
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("title")), "%" + title.toLowerCase() + "%"));
+        }
+
+        if (minPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+        }
+
+        if (maxPrice != null) {
+            spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        }
+
+        Sort sort = Sort.by("title").ascending(); // Ordenação padrão: título crescente
+        if ("priceAsc".equals(sortBy)) {
+            sort = Sort.by("price").ascending();
+        } else if ("priceDesc".equals(sortBy)) {
+            sort = Sort.by("price").descending();
+        } else if ("nameDesc".equals(sortBy)) {
+            sort = Sort.by("title").descending();
+        }
+
+        return adRepository.findAll(spec, sort);
+    }
 
 }

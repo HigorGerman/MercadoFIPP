@@ -26,7 +26,6 @@ async function fetchLatestAds() {
                         <h5>${ad.title}</h5>
                         <p>${ad.descr || 'Sem descrição'}</p>
                         <p class="product-price">R$ ${ad.price.toFixed(2)}</p>
-                        <a href="interacao.html?adId=${ad.id}" class="btn btn-primary">Falar com Vendedor</a>
                     </div>
                 </div>
             `;
@@ -39,7 +38,7 @@ async function fetchLatestAds() {
 
         ads.forEach(ad => {
             const row = `
-                <tr>
+                <tr onclick="navigateToDetails(${ad.id})" style="cursor: pointer;">
                     <td>${ad.title}</td>
                     <td>${ad.descr || 'Sem descrição'}</td>
                     <td>${ad.category?.name || 'Sem categoria'}</td>
@@ -57,6 +56,11 @@ async function fetchLatestAds() {
         const adsContainer = document.getElementById("latest-ads");
         adsContainer.innerHTML = `<p class="text-danger">Não foi possível carregar os anúncios. Tente novamente mais tarde.</p>`;
     }
+}
+
+// Função para navegar para a página de detalhes do anúncio
+function navigateToDetails(adId) {
+    window.location.href = `DetalhesAnuncio.html?adId=${adId}`;
 }
 
 // Chama a função ao carregar a página

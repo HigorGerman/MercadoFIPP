@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Anúncios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-custom">
+        <a class="navbar-brand" href="index.html">MercadoFIPP</a>
+    </nav>
+
+    <div class="container mt-5">
+        <h3>Buscar Anúncios</h3>
+        <form id="search-form" class="mb-4">
+            <div class="form-row">
+                <!-- Campo para Título -->
+                <div class="col-md-4">
+                    <label for="title">Título</label>
+                    <input type="text" class="form-control" id="title" placeholder="Título do anúncio">
+                </div>
+                <!-- Campo para Preço Mínimo -->
+                <div class="col-md-4">
+                    <label for="minPrice">Preço Mínimo</label>
+                    <input type="number" class="form-control" id="minPrice" placeholder="R$">
+                </div>
+                <!-- Campo para Preço Máximo -->
+                <div class="col-md-4">
+                    <label for="maxPrice">Preço Máximo</label>
+                    <input type="number" class="form-control" id="maxPrice" placeholder="R$">
+                </div>
+            </div>
+            <div class="form-row mt-3">
+                <!-- Campo para Ordenação -->
+                <div class="col-md-4">
+                    <label for="sortBy">Ordenar Por</label>
+                    <select class="form-control" id="sortBy">
+                        <option value="nameAsc">Nome (A-Z)</option>
+                        <option value="nameDesc">Nome (Z-A)</option>
+                        <option value="priceAsc">Menor Preço</option>
+                        <option value="priceDesc">Maior Preço</option>
+                    </select>
+                </div>
+                <!-- Botão de Buscar -->
+                <div class="col-md-4 align-self-end">
+                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                </div>
+            </div>
+        </form>
+
+        <h4>Resultados</h4>
+        <div id="results" class="product-list"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/BuscaAnuncio.js"></script>
+</body>
+</html>
