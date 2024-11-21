@@ -48,3 +48,33 @@ async function answerQuestion(questionId) {
         console.error('Erro ao responder pergunta:', error);
     }
 }
+
+async function sendQuestion(adId) {
+    const questionText = document.getElementById('question-text').value;
+
+    if (!questionText) {
+        alert('Escreva sua pergunta antes de enviar.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8080/apis/ad/add-question?adId=${adId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: questionText
+            }),
+        });
+
+        if (response.ok) {
+            alert('Pergunta enviada com sucesso!');
+            location.reload();
+        } else {
+            alert('Erro ao enviar a pergunta.');
+        }
+    } catch (error) {
+        console.error('Erro ao enviar a pergunta:', error);
+    }
+}

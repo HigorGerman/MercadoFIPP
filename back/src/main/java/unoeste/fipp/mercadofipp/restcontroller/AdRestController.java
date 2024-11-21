@@ -57,14 +57,21 @@ public class AdRestController {
             return ResponseEntity.badRequest().body("Erro");
     }
 
-    @PostMapping(value="add-question")
-    public ResponseEntity<Object> addQuestion(@RequestBody Pergunta pergunta) {
-        pergunta = adService.addQuestion(pergunta);
-        if(pergunta!=null)
-            return ResponseEntity.ok(pergunta);
-        else
-            return ResponseEntity.badRequest().body("Erro ao add pergunta");
+    @PostMapping("/add-question")
+    public ResponseEntity<?> addQuestion(@RequestParam Long adId, @RequestBody Pergunta pergunta) {
+        try {
+            Pergunta savedQuestion = adService.addQuestion(adId, pergunta);
+            System.out.println("Ad ID recebido: " + adId);
+            System.out.println("Pergunta recebida: " + pergunta.getText());
+
+            return ResponseEntity.ok(savedQuestion);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Erro ao salvar pergunta.");
+        }
     }
+
     @PostMapping(value="answer-question")
     public ResponseEntity<Object> answerQuestion(@RequestParam Long questionId, @RequestParam String response, @AuthenticationPrincipal User currentUser) {
         Pergunta pergunta = adService.answerQuestion(questionId, response,currentUser);

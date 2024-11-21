@@ -65,19 +65,25 @@ public class AdService {
     }
 
 
-    public Pergunta addQuestion(Pergunta pergunta) {
+    public Pergunta addQuestion(Long adId, Pergunta pergunta) {
         try {
-            Long adId = pergunta.getAd().getId();
+            // Busca o anúncio pelo ID
             Ad ad = adRepository.findById(adId).orElseThrow(() -> new RuntimeException("Anúncio não encontrado"));
 
-            // Associa o anúncio confirmado à pergunta
+            // Associa o anúncio à pergunta
             pergunta.setAd(ad);
+            System.out.println("Anúncio encontrado: " + ad.getTitle());
+            System.out.println("Pergunta associada: " + pergunta.getText());
+
+            // Salva a pergunta
             return questionRepository.save(pergunta);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
 
 
     public Pergunta  answerQuestion(Long questionId, String response, User currentUser) {

@@ -15,11 +15,9 @@ public class Pergunta {
     @Column(name="per_resp")
     private String resp;
 
-    //@OneToOne(fetch=FetchType.LAZY)
     @ManyToOne
-    @JoinColumn(name = "anu_id")
-    //@JsonIgnore
-    @JsonIgnore // Ignora o campo durante a serialização para evitar ciclo
+    @JoinColumn(name = "anu_id",nullable = false)
+    @JsonIgnore
     private Ad ad;
 
     public Pergunta(Long id, String text, String resp) {
