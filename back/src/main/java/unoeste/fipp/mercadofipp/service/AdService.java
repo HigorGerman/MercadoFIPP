@@ -70,7 +70,7 @@ public class AdService {
             Long adId = pergunta.getAd().getId();
             Ad ad = adRepository.findById(adId).orElseThrow(() -> new RuntimeException("Anúncio não encontrado"));
 
-            // Associa o anúncio confirmado à pergunta e salva
+            // Associa o anúncio confirmado à pergunta
             pergunta.setAd(ad);
             return questionRepository.save(pergunta);
         } catch (Exception e) {
@@ -265,5 +265,13 @@ public class AdService {
 
         return adRepository.findAll(spec, sort);
     }
+
+    public List<Pergunta> getPendingQuestionsBySeller(Long sellerId) {
+        // Consulta personalizada no repository para listar perguntas pendentes
+        return questionRepository.findPendingQuestionsBySeller(sellerId);
+    }
+
+    
+
 
 }

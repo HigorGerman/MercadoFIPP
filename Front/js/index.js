@@ -10,6 +10,7 @@ function updateNavbarForLoggedUser() {
             <a href="CadastroAnuncio.html" class="btn btn-outline-light mr-2">Cadastrar Produto</a>
             <button id="logout-btn" class="btn btn-outline-light">Sair</button>
             <a href="loginAdm.html" class="btn btn-outline-light ml-2">Administrativo</a>
+            <a href="loginVendedor.html" class="btn btn-outline-light ml-2">Vendedor</a>
         `;
 
         // Configura o botão de logout
@@ -22,6 +23,7 @@ function updateNavbarForLoggedUser() {
             <a href="login.html" class="btn btn-outline-light mr-2">Login</a>
             <a href="cadastroUser.html" class="btn btn-outline-light">Cadastro</a>
             <a href="loginAdm.html" class="btn btn-outline-light ml-2">Administrativo</a>
+            <a href="loginVendedor.html" class="btn btn-outline-light ml-2">Vendedor</a>
         `;
     }
 }

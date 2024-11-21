@@ -56,6 +56,7 @@ public class AdRestController {
         else
             return ResponseEntity.badRequest().body("Erro");
     }
+
     @PostMapping(value="add-question")
     public ResponseEntity<Object> addQuestion(@RequestBody Pergunta pergunta) {
         pergunta = adService.addQuestion(pergunta);
@@ -78,6 +79,13 @@ public class AdRestController {
         List<Pergunta> perguntas    = adService.getQuestionsByAd(adId);
         return ResponseEntity.ok(perguntas);
     }
+
+    @GetMapping(value="questions-pending")
+    public ResponseEntity<Object> getPendingQuestions(@RequestParam(required = false) Long sellerId) {
+        List<Pergunta> perguntas = adService.getPendingQuestionsBySeller(sellerId);
+        return ResponseEntity.ok(perguntas);
+    }
+
 
     @GetMapping(value="delete")
     public ResponseEntity<Object> delete(Long id)
