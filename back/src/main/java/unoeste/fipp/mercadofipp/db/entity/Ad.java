@@ -1,5 +1,6 @@
 package unoeste.fipp.mercadofipp.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class Ad {
     @JoinColumn(name = "usr_id", nullable = false)
     private User user;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "ad")
     private List<Foto> fotos;
 

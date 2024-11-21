@@ -89,28 +89,35 @@ public class AdService {
     }
 
     public boolean savePhotos(Long adId, List<MultipartFile> files) {
-        Optional<Ad> adOptional=adRepository.findById(adId);
-        if(!adOptional.isPresent())
+        Optional<Ad> adOptional = adRepository.findById(adId);
+        if (!adOptional.isPresent())
             return false;
+
         Ad ad = adOptional.get();
-        for(MultipartFile file:files){
-            try{
+        String diretorio = "uploads/photos/"; // Diretório relativo ao local onde o servidor está rodando.
 
+        // Cria o diretório, caso não exista.
+        File folder = new File(diretorio);
+        if (!folder.exists()) {
+            folder.mkdirs(); // Cria os diretórios pai, se necessário.
+        }
 
-                String diretorio = "uploads/photos/";
-                String fileName = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
-                File destinationFile = new File(diretorio+fileName);
+        for (MultipartFile file : files) {
+            try {
+                // Gera o nome único do arquivo.
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                File destinationFile = new File(diretorio + fileName);
 
-                //se o diretorio nao existir ele vai criar
-                destinationFile.getParentFile().mkdirs();
+                // Salva o arquivo no diretório.
                 file.transferTo(destinationFile);
 
+                // Salva no banco.
                 Foto foto = new Foto();
                 foto.setFilename(fileName);
                 foto.setAd(ad);
                 ad.getFotos().add(foto);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
@@ -118,6 +125,7 @@ public class AdService {
         adRepository.save(ad);
         return true;
     }
+
 
     public List<Ad> getAllWithFilter(Long catId, Double minPrice, Double maxPrice, String startDate, String endDate, String sortBy) {
         //faz uma consulta personalizada com filtros
@@ -161,31 +169,38 @@ public class AdService {
 
     public boolean addAdWithPhotos(Ad ad, List<MultipartFile> files) {
         try {
+            // Certifica-se de que o ID do anúncio esteja nulo para evitar problemas de duplicação
+            ad.setId(null);
+
             // Salva o anúncio no banco de dados
             ad = adRepository.save(ad);
 
-            // Processa e salva as fotos
+            // Diretório onde os arquivos serão armazenados
+            String diretorioBase = "C:/Users/lucas/uploads/photos/";
+
             for (MultipartFile file : files) {
-                String diretorio = "uploads/photos/";
+
                 String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-                File destinationFile = new File(diretorio + fileName);
 
-                // Cria o diretório, se necessário, e salva o arquivo
-                destinationFile.getParentFile().mkdirs();
+                File destinationFile = new File(diretorioBase + fileName);
+
+                if (!destinationFile.getParentFile().exists()) {
+                    destinationFile.getParentFile().mkdirs();
+                }
+
                 file.transferTo(destinationFile);
-
-                // Cria a entidade Foto e associa ao anúncio
                 Foto foto = new Foto();
-                foto.setFilename(fileName);
-                foto.setAd(ad);
-                fotoRepository.save(foto); // Salva a foto no banco de dados
+                foto.setFilename(fileName); // Salva apenas o nome do arquivo
+                foto.setAd(ad); // Relaciona a foto com o anúncio
+                fotoRepository.save(foto); // Salva a entidade Foto no banco de dados
             }
 
-            return true; // Tudo foi salvo com sucesso
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false; // Algum erro ocorreu
+            return false;
         }
     }
+
 
 }

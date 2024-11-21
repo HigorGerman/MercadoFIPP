@@ -1,5 +1,6 @@
 package unoeste.fipp.mercadofipp.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class Foto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "anu_id")
+    @JsonBackReference
     private Ad ad;
     public Foto(Long id, String filename, Ad ad) {
         this.id = id;

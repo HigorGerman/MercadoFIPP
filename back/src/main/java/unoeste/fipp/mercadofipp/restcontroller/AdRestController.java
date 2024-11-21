@@ -108,17 +108,15 @@ public class AdRestController {
         return ResponseEntity.ok(ads);
     }
 
-    @PostMapping(value = "add-with-photos")
+    @PostMapping(value = "add-with-photos", consumes = "multipart/form-data")
     public ResponseEntity<?> addAdWithPhotos(
             @RequestPart("ad") Ad ad,
             @RequestPart("files") List<MultipartFile> files) {
         try {
-            // Verifica o limite de fotos
             if (files.size() > 3) {
                 return ResponseEntity.badRequest().body("O máximo de fotos permitidas são 3.");
             }
 
-            // Chama o serviço para salvar o anúncio e as fotos
             boolean sucesso = adService.addAdWithPhotos(ad, files);
             if (sucesso) {
                 return ResponseEntity.ok("Anúncio e fotos adicionados com sucesso!");
@@ -130,6 +128,5 @@ public class AdRestController {
             return ResponseEntity.status(500).body("Erro ao processar a solicitação.");
         }
     }
-
 
 }
